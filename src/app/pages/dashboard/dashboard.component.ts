@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  bannerImg = "assets/images/banner-image.lg.jpg";
+  searchText: any;
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
+  inputChanged(value: string): void {
+    this.searchText = value;
+  }
 }

@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<section class="dashboard">
+  <app-banner class="dashboard__banner" [image]="bannerImg"></app-banner>
+  <div class="dashboard__wrapper default-container">
+    <div class="dashboard__input-section">
+      <app-search-input
+        class="dashboard__search-input"
+        placeHolder="Product name"
+        (onChange)="inputChanged($event)"
+      ></app-search-input>
+    </div>
+  </div>
+</section>
