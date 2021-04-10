@@ -32,8 +32,6 @@ npm run start:server
 ```
 The default location for the json-server is [`localhost:8080`](http://localhost:8080)
 
-<br />
-
 ## Running both front-end and API server
 
 Run both front-end and API server using
