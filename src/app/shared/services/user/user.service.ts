@@ -22,7 +22,7 @@ export class UserService {
     localStorage.setItem(StorageTypes.USER_DETAILS, JSON.stringify(user));
   }
 
-  getUserDetails(): any {
+  get getUserDetails(): any {
     const user = localStorage.getItem(StorageTypes.USER_DETAILS);
     return user ? JSON.parse(user) : null;
   }

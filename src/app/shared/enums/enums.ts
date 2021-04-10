@@ -3,6 +3,7 @@ export enum StorageTypes {
 }
 
 export enum UserType {
-  ADMIN = "ADMIN",
+  ADMIN = "ADMINISTRATOR",
+  ADMIN_SHORT = "ADMIN",
   CUSTOMER = "CUSTOMER"
 }
