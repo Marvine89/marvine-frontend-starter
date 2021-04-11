@@ -18,7 +18,7 @@ export class ProductService {
   }
 
   searchProducts(keyword: string = "", page: number = 1): Observable<any> {
-    return this.httpService.get(`/products?q=${keyword}?_page=${page}&_limit=12`).pipe(
+    return this.httpService.get(`/products?q=${keyword}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

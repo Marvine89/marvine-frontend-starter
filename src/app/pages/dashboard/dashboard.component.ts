@@ -35,10 +35,10 @@ export class DashboardComponent implements OnInit {
   // Load More product on scroll reach end
   loadMoreProducts(): void {
     const page = (Math.trunc(this.products.length / 12) + 1);
-    if (this.currentPage === page) return;
+    if (this.currentPage === page || this.searchText) return;
+
     this.currentPage = page;
     this.isLoading.more = true;
-
     this.productService.fetchProducts(page)
       .subscribe(
         (products) => {
@@ -49,6 +49,25 @@ export class DashboardComponent implements OnInit {
   }
 
   inputChanged(value: string): void {
+    if (value === this.searchText) return;
     this.searchText = value;
+    this.seachProducts();
+  }
+
+  // Load More product on scroll reach end
+  seachProducts(): void {
+    if (!this.searchText) {
+      this.loadProducts();
+      return;
+    }
+
+    this.isLoading.init = true;
+    this.productService.searchProducts(this.searchText)
+      .subscribe(
+        (products) => {
+          this.products = products;
+          this.isLoading.init = false;
+        },
+        () => this.isLoading.init = false);
   }
 }
