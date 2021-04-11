@@ -28,6 +28,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.valueChanged$.complete();
     this.ngUnsubscribe.unsubscribe();
   }
 
