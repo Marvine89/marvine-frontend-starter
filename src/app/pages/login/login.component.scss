@@ -20,4 +20,11 @@
     display: flex;
     justify-content: center;
   }
+
+  &__loader-wrapper {
+    height: 136px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

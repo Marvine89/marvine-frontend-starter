@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { UserType } from 'src/app/shared/enums/enums';
+import { User } from 'src/app/shared/models/user.model';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 interface IForm {
-  selectedUser: string;
+  selectedUserType: "ADMIN" | "CUSTOMER";
 }
 
 @Component({
@@ -10,13 +14,27 @@ interface IForm {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   selectedUser = "";
   userType = UserType;
+  users$!: Observable<User[]>;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router) {
+    this.userService.clearUserDetails();
+  }
 
-  login({ selectedUser }: IForm) {
-    console.log(selectedUser);
+  ngOnInit(): void {
+    this.users$ = this.userService.fetchUsers();
+  }
+
+  login({ selectedUserType }: IForm, users: User[]) {
+    const selectedUser = users.find((user) => user.user.role === selectedUserType);
+
+    if (selectedUser) {
+      this.userService.saveUserDetails(selectedUser);
+      this.router.navigate(["/"]);
+    }
   }
 }

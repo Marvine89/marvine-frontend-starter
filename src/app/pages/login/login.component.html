@@ -1,12 +1,16 @@
 <section class="login-page">
   <div class="login-page__form">
     <h3 class="t3 uppercase center login-page__title">Log in as ?</h3>
-    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+    <form
+      *ngIf="users$ | async as users; else loaderContainer"
+      #loginForm="ngForm"
+      (ngSubmit)="login(loginForm.value, users)"
+    >
       <mat-form-field appearance="fill" class="login-page__select-user">
         <mat-label>Select user type</mat-label>
-        <mat-select name="selectedUser" ngModel required>
-          <mat-option [value]="userType.ADMIN_SHORT">
-            {{ userType.ADMIN }}
+        <mat-select name="selectedUserType" ngModel required>
+          <mat-option [value]="userType.ADMIN">
+            {{ userType.ADMINISTRATOR }}
           </mat-option>
           <mat-option [value]="userType.CUSTOMER">
             {{ userType.CUSTOMER }}
@@ -25,5 +29,11 @@
         </button>
       </div>
     </form>
+
+    <ng-template #loaderContainer>
+      <div class="login-page__loader-wrapper">
+        <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </section>

@@ -1,20 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { StorageTypes } from '../../enums/enums';
+import { IUser } from '../../interfaces/user.interface';
+import { User } from '../../models/user.model';
 import { HttpService } from '../http/http.service';
+import { ErrorService } from '../error/error.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private errorService: ErrorService) { }
 
-  fetchUsers(): Observable<any> {
-    return this.httpService.get("/users");
+  fetchUsers(): Observable<User[]> {
+    return this.httpService.get<IUser[]>("/users").pipe(
+      map((users) => users.map((user) => new User(user))),
+      catchError(() => this.errorService.showError())
+    );
   }
 
   fetchUser(user_id: number): Observable<any> {
-    return this.httpService.get(`/users/${user_id}`);
+    return this.httpService.get(`/users/${user_id}`).pipe(
+      catchError(() => this.errorService.showError())
+    );
   }
 
   saveUserDetails(user: any): void {
@@ -25,5 +34,9 @@ export class UserService {
   get getUserDetails(): any {
     const user = localStorage.getItem(StorageTypes.USER_DETAILS);
     return user ? JSON.parse(user) : null;
+  }
+
+  clearUserDetails(): void {
+    localStorage.removeItem(StorageTypes.USER_DETAILS);
   }
 }
