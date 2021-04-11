@@ -8,5 +8,21 @@
         (onChange)="inputChanged($event)"
       ></app-search-input>
     </div>
+    <div class="dashboard__products-section">
+      <div
+        *ngIf="isLoading.init; else showProducts"
+        class="dashboard__initial-loader-block"
+      >
+        <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
+      </div>
+      <ng-template #showProducts>
+        <div class="dashboard__products-block">
+          <app-product-card
+            *ngFor="let product of products"
+            class="dashboard__products"
+          ></app-product-card>
+        </div>
+      </ng-template>
+    </div>
   </div>
 </section>

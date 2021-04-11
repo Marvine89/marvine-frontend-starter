@@ -4,16 +4,16 @@ export interface IUser {
     firstName: string;
     lastName: string;
   },
-  "phone": string;
-  "avatar": string;
-  "email": string;
-  "address": IAddress;
-  "role": "ADMIN" | "CUSTOMER";
+  phone: string;
+  avatar: string;
+  email: string;
+  address: IAddress;
+  role: "ADMIN" | "CUSTOMER";
 }
 
 interface IAddress {
-  "country": string;
-  "city": string;
-  "zip": string;
-  "street": string;
+  country: string;
+  city: string;
+  zip: string;
+  street: string;
 }
