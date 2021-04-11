@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 
 @Component({
@@ -10,7 +10,8 @@ import { ProductService } from 'src/app/shared/services/product/product.service'
 export class DashboardComponent implements OnInit {
   bannerImg = "assets/images/banner-image.lg.jpg";
   searchText: string = '';
-  products!: Product[];
+  products: IProduct[] = [];
+  currentPage: number = 1;
   isLoading: { init: boolean; more: boolean } = { init: true, more: false };
 
   constructor(private productService: ProductService) { }
@@ -29,6 +30,22 @@ export class DashboardComponent implements OnInit {
           this.isLoading.init = false;
         },
         () => this.isLoading.init = false);
+  }
+
+  // Load More product on scroll reach end
+  loadMoreProducts(): void {
+    const page = (Math.trunc(this.products.length / 12) + 1);
+    if (this.currentPage === page) return;
+    this.currentPage = page;
+    this.isLoading.more = true;
+
+    this.productService.fetchProducts(page)
+      .subscribe(
+        (products) => {
+          this.products = [...this.products, ...products];
+          this.isLoading.more = false;
+        },
+        () => this.isLoading.more = false);
   }
 
   inputChanged(value: string): void {

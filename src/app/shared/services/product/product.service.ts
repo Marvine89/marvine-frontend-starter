@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Product } from '../../interfaces/product.interface';
+import { IProduct } from '../../interfaces/product.interface';
 import { ErrorService } from '../error/error.service';
 import { HttpService } from '../http/http.service';
 
@@ -11,14 +11,14 @@ import { HttpService } from '../http/http.service';
 export class ProductService {
   constructor(private httpService: HttpService, private errorService: ErrorService) { }
 
-  fetchProducts(page: number = 1): Observable<Product[]> {
-    return this.httpService.get<Product[]>(`/products?_page=${page}&_limit=12`).pipe(
+  fetchProducts(page: number = 1): Observable<IProduct[]> {
+    return this.httpService.get<IProduct[]>(`/products?_page=${page}&_limit=12`).pipe(
       catchError(() => this.errorService.showError())
     );
   }
 
-  searchProducts(keyword: string = ""): Observable<any> {
-    return this.httpService.get(`/products?q=${keyword}`).pipe(
+  searchProducts(keyword: string = "", page: number = 1): Observable<any> {
+    return this.httpService.get(`/products?q=${keyword}?_page=${page}&_limit=12`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

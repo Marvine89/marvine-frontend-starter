@@ -11,16 +11,26 @@
     <div class="dashboard__products-section">
       <div
         *ngIf="isLoading.init; else showProducts"
-        class="dashboard__initial-loader-block"
+        class="dashboard__loader-block"
       >
         <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
       </div>
       <ng-template #showProducts>
-        <div class="dashboard__products-block">
+        <div
+          class="dashboard__products-block"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          (scrolled)="loadMoreProducts()"
+        >
           <app-product-card
             *ngFor="let product of products"
+            [product]="product"
             class="dashboard__products"
           ></app-product-card>
+        </div>
+        <div *ngIf="isLoading.more" class="dashboard__loader-block">
+          <mat-spinner [strokeWidth]="3" [diameter]="60"></mat-spinner>
         </div>
       </ng-template>
     </div>
