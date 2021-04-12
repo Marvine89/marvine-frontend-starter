@@ -18,9 +18,9 @@ import { ProductModalComponent } from 'src/app/shared/components/product-modal/p
 })
 export class ProductComponent implements OnInit, OnDestroy {
   product$!: Observable<IProduct>;
-  isAdmin: boolean = false;
+  isAdmin = false;
   userId!: number;
-  addToCartLoading: boolean = false;
+  addToCartLoading = false;
   ngUnSubscribe: Subject<void> = new Subject<void>();
 
   constructor(

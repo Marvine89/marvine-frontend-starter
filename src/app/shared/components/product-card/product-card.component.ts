@@ -15,10 +15,10 @@ import { ProductService } from '../../services/product/product.service';
 })
 export class ProductCardComponent {
   @Input() product!: IProduct;
-  @Output('onClick') clicked: EventEmitter<number> = new EventEmitter<number>();
-  @Output('onDelete') deleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() productClicked: EventEmitter<number> = new EventEmitter<number>();
+  @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();
   ngUnSubscribe: Subject<void> = new Subject<void>();
-  isAdmin: boolean = false;
+  isAdmin = false;
 
   constructor(
     private userService: UserService,
@@ -29,7 +29,7 @@ export class ProductCardComponent {
   }
 
   viewProduct(): void {
-    this.clicked.emit(this.product.id);
+    this.productClicked.emit(this.product.id);
   }
 
   deleteProduct(): void {
@@ -41,7 +41,7 @@ export class ProductCardComponent {
         if (result === 'delete') {
           this.productService.deleteProduct(this.product.id).subscribe(() => {
             this.snackBar.open('Product deleted successfully', 'Ok', { duration: 4000 });
-            this.deleted.emit();
+            this.productDeleted.emit();
           });
         }
       });

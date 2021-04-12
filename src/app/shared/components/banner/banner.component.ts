@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent implements OnInit {
-  @Input() image: string = "assets/images/banner-image.jpg";
+  @Input() image = 'assets/images/banner-image.jpg';
 
   constructor() { }
 

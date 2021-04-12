@@ -5,7 +5,7 @@ import { IProduct } from '../../interfaces/product.interface';
 
 interface IProductModal {
   option: 'add' | 'edit' | 'delete';
-  data?: IProduct
+  data?: IProduct;
 }
 
 @Component({
@@ -17,6 +17,5 @@ export class ProductModalComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ProductModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IProductModal,
-    private _snackBar: MatSnackBar) { }
+    @Inject(MAT_DIALOG_DATA) public data: IProductModal) { }
 }

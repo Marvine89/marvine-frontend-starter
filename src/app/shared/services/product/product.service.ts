@@ -21,15 +21,15 @@ export class ProductService {
     );
   }
 
-  searchProducts(keyword: string = ""): Observable<IProduct[]> {
+  searchProducts(keyword: string = ''): Observable<IProduct[]> {
     return this.httpService.get<IProduct[]>(`/products?q=${keyword}`).pipe(
       shareReplay(),
       catchError(() => this.errorService.showError())
     );
   }
 
-  fetchProduct(product_id: number): Observable<IProduct> {
-    return this.httpService.get<IProduct>(`/products/${product_id}`).pipe(
+  fetchProduct(productId: number): Observable<IProduct> {
+    return this.httpService.get<IProduct>(`/products/${productId}`).pipe(
       shareReplay(),
       catchError(() => this.errorService.showError())
     );
@@ -37,7 +37,7 @@ export class ProductService {
 
 
   addProduct(product: IProduct): Observable<IProduct> {
-    return this.httpService.post<IProduct>("/products", product).pipe(
+    return this.httpService.post<IProduct>('/products', product).pipe(
       catchError(() => this.errorService.showError())
     );
   }
@@ -48,9 +48,9 @@ export class ProductService {
     );
   }
 
-  deleteProduct(product_id: number): Observable<any> {
+  deleteProduct(productId: number): Observable<any> {
     const userId = this.userService.getUserId || 0;
-    return this.httpService.delete(`/products/${product_id}`).pipe(
+    return this.httpService.delete(`/products/${productId}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

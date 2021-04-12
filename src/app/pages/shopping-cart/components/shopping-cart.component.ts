@@ -12,7 +12,7 @@ import { UserService } from 'src/app/shared/services/user/user.service';
 export class ShoppingCartComponent implements OnInit {
   products: IUserProduct[] = [];
   isLoading!: boolean;
-  totalPrice: number = 0;
+  totalPrice = 0;
 
   constructor(
     private cartService: CartService,

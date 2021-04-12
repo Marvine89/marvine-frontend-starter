@@ -12,10 +12,10 @@ import { ProductService } from 'src/app/shared/services/product/product.service'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  bannerImg = "assets/images/banner-image.lg.jpg";
-  searchText: string = '';
+  bannerImg = 'assets/images/banner-image.lg.jpg';
+  searchText = '';
   products: IProduct[] = [];
-  currentPage: number = 1;
+  currentPage = 1;
   isLoading: { init: boolean; more: boolean } = { init: true, more: false };
 
   constructor(
@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
   // Load More product on scroll reach end
   loadMoreProducts(): void {
     const page = (Math.trunc(this.products.length / 12) + 1);
-    if (this.currentPage === page || this.searchText) return;
+    if (this.currentPage === page || this.searchText) { return; }
 
     this.currentPage = page;
     this.isLoading.more = true;
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
   }
 
   inputChanged(value: string): void {
-    if (value === this.searchText) return;
+    if (value === this.searchText) { return; }
     this.searchText = value;
     this.seachProducts();
   }
@@ -81,7 +81,7 @@ export class DashboardComponent implements OnInit {
     this.loadProducts();
   }
 
-  productClicked(product_id: number): void {
-    this.router.navigate([`/product/${product_id}`]);
+  productClicked(productId: number): void {
+    this.router.navigate([`/product/${productId}`]);
   }
 }
