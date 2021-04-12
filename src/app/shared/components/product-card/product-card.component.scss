@@ -7,4 +7,9 @@
     line-height: 26px;
     min-height: 52px;
   }
+
+  &__button-block {
+    display: flex;
+    justify-content: space-between;
+  }
 }

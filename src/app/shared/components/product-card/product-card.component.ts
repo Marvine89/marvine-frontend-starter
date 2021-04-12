@@ -1,17 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IProduct } from '../../interfaces/product.interface';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent {
   @Input() product!: IProduct;
+  @Output('onClick') clicked: EventEmitter<number> = new EventEmitter<number>();
+  isAdmin: Boolean = false;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
+    this.isAdmin = this.userService.getUserAdmin;
   }
 
+  viewProduct(): void {
+    this.clicked.emit(this.product.id);
+  }
+  
+  deleteProduct(): void { }
 }

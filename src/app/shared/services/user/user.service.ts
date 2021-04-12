@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { StorageTypes } from '../../enums/enums';
+import { StorageTypes, UserType } from '../../enums/enums';
 import { IUser } from '../../interfaces/user.interface';
 import { User } from '../../models/user.model';
 import { HttpService } from '../http/http.service';
@@ -26,14 +26,19 @@ export class UserService {
     );
   }
 
-  saveUserDetails(user: any): void {
+  saveUserDetails(user: User): void {
     if (!user) return;
     localStorage.setItem(StorageTypes.USER_DETAILS, JSON.stringify(user));
   }
 
-  get getUserDetails(): any {
+  get getUserDetails(): User | null {
     const user = localStorage.getItem(StorageTypes.USER_DETAILS);
     return user ? JSON.parse(user) : null;
+  }
+
+  get getUserAdmin(): Boolean {
+    const user = this.getUserDetails;
+    return user ? user.user.role === UserType.ADMIN : false;
   }
 
   clearUserDetails(): void {

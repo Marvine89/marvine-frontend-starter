@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit {
   currentPage: number = 1;
   isLoading: { init: boolean; more: boolean } = { init: true, more: false };
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -54,7 +55,7 @@ export class DashboardComponent implements OnInit {
     this.seachProducts();
   }
 
-  // Load More product on scroll reach end
+  // Search for specific product
   seachProducts(): void {
     if (!this.searchText) {
       this.loadProducts();
@@ -69,5 +70,9 @@ export class DashboardComponent implements OnInit {
           this.isLoading.init = false;
         },
         () => this.isLoading.init = false);
+  }
+
+  productClicked(product_id: number): void {
+    this.router.navigate([`/product/${product_id}`]);
   }
 }
