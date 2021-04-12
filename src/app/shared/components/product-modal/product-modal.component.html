@@ -1,9 +1,12 @@
 <section class="product-modal">
   <div class="product-modal__header">
     <h5 class="product-modal__header-title">
-      {{ data?.option === "delete" ? "Delete Product" : "Add/Edit Product" }}
+      {{ data?.option === "delete" ? "Delete Product" : "Edit Product" }}
     </h5>
-    <a class="product-modal__close-icon-block pointer" (click)="dialogRef.close()">
+    <a
+      class="product-modal__close-icon-block pointer"
+      (click)="dialogRef.close()"
+    >
       <i class="product-modal__close-icon material-icons pointer"> close </i>
     </a>
   </div>
