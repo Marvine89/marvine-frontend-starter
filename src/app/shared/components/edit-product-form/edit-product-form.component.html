@@ -4,15 +4,15 @@
       appearance="outline"
       class="default-input form-component__input"
     >
-      <mat-label>Product Name</mat-label>
+      <mat-label>Product name</mat-label>
       <input
         type="text"
         formControlName="name"
         matInput
-        placeholder="Enter Product Name"
+        placeholder="Enter Product name"
       />
       <mat-error *ngIf="formData.get('name')?.hasError">
-        Product Name is required
+        Product name is required
       </mat-error>
     </mat-form-field>
   </div>
