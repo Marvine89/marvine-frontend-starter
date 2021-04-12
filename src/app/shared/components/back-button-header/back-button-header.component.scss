@@ -1,7 +1,17 @@
+@import "media-query";
+
 .back-button {
-  padding: 20px;
+  padding: 20px 0px;
+
+  @include sm-tablet {
+    padding: 20px;
+  }
 
   &__arrow-back {
-    font-size: 50px;
+    font-size: 40px;
+
+    @include sm-tablet {
+      font-size: 50px;
+    }
   }
 }

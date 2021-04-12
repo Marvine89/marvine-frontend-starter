@@ -1,20 +1,37 @@
+@import "media-query";
+
 .product-page {
+  padding-bottom: 30%;
+
   &__wrapper {
-    width: 900px;
+    width: 95%;
     min-height: 400px;
-    margin: 30px auto;
+    margin: 10px auto;
     padding: 20px 0px;
     position: relative;
+
+    @include sm-desktop {
+      width: 900px;
+      margin: 30px auto;
+    }
   }
 
   &__details-block {
-    padding: 0px 30px;
+    padding: 0px 15px;
+
+    @include sm-tablet {
+      padding: 0px 30px;
+    }
   }
 
   &__carousel-block {
-    padding: 20px;
-    width: 400px;
+    width: 100%;
     margin: auto;
+
+    @include sm-tablet {
+      width: 400px;
+      padding: 20px;
+    }
   }
 
   &__carousel {
