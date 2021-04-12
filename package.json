@@ -7,7 +7,7 @@
     "start:server": "json-server ./server/generator.js --port 8080 --delay 500",
     "start:dev": "concurrently \"npm run start:server\" \"npm start\"",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --browsers=ChromeHeadless --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
