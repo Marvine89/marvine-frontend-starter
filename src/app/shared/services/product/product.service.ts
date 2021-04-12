@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, shareReplay } from 'rxjs/operators';
+import { catchError, shareReplay, switchMap } from 'rxjs/operators';
 import { IProduct } from '../../interfaces/product.interface';
+import { CartService } from '../cart/cart.service';
 import { ErrorService } from '../error/error.service';
 import { HttpService } from '../http/http.service';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  constructor(private httpService: HttpService, private errorService: ErrorService) { }
+  constructor(
+    private httpService: HttpService,
+    private errorService: ErrorService,
+    private userService: UserService,
+    private cartSerice: CartService) { }
 
   fetchProducts(page: number = 1): Observable<IProduct[]> {
     return this.httpService.get<IProduct[]>(`/products?_page=${page}&_limit=12`).pipe(
@@ -45,7 +51,9 @@ export class ProductService {
   }
 
   deleteProduct(product_id: number): Observable<any> {
+    const userId = this.userService.getUserId || 0;
     return this.httpService.delete(`/products/${product_id}`).pipe(
+      switchMap(() => this.cartSerice.deleteCart(userId, product_id)),
       catchError(() => this.errorService.showError())
     );
   }

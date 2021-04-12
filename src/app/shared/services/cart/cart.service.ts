@@ -58,7 +58,7 @@ export class CartService {
   }
 
   deleteCart(user_id: number, product_id: number): Observable<any> {
-    return this.httpService.delete(`/carts/${user_id}/${product_id}`).pipe(
+    return this.httpService.delete(`/carts/${user_id}/products/${product_id}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }
