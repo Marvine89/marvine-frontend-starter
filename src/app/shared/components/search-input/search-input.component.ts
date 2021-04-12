@@ -8,9 +8,9 @@ import { debounceTime } from 'rxjs/operators';
   styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
-  @Input() placeHolder: string = "Enter search text";
-  @Input("value") value: string = "";
-  @Output("onChange") inputChanged = new EventEmitter<string>();
+  @Input() placeHolder = 'Enter search text';
+  @Input() value = '';
+  @Output() inputChanged = new EventEmitter<string>();
   ngUnsubscribe: Subscription = new Subscription();
   valueChanged$: Subject<string> = new Subject();
 
@@ -33,16 +33,16 @@ export class SearchInputComponent implements OnInit, OnDestroy {
   }
 
   valueChanged(target?: any): void {
-    const value = <HTMLTextAreaElement>target;
-    this.emitValue(value.value)
+    const value = target as HTMLTextAreaElement;
+    this.emitValue(value.value);
   }
 
-  emitValue(value: string = ""): void {
+  emitValue(value: string = ''): void {
     this.valueChanged$.next(value);
   }
 
   clearSearch(): void {
-    this.value = "";
+    this.value = '';
     this.emitValue();
   }
 }

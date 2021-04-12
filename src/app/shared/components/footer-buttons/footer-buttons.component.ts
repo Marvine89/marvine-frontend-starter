@@ -8,17 +8,17 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./footer-buttons.component.scss']
 })
 export class FooterButtonsComponent {
-  isAdmin: boolean = false;
+  isAdmin = false;
 
   constructor(private router: Router, private userService: UserService) {
     this.isAdmin = this.userService.checkUserType;
   }
 
   logout(): void {
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 
   shoppingCard(): void {
-    this.router.navigate(["/shopping-card"]);
+    this.router.navigate(['/shopping-card']);
   }
 }

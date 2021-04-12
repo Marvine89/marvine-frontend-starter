@@ -22,7 +22,7 @@ describe('ShoppingCartComponent', () => {
         {
           provide: UserService,
           useValue: {
-            getUserId: "FAKE-USER-ID"
+            getUserId: 'FAKE-USER-ID'
           }
         }
       ]

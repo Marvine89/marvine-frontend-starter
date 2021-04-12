@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { IProduct } from '../../interfaces/product.interface';
@@ -9,11 +9,11 @@ import { ProductService } from '../../services/product/product.service';
   templateUrl: './edit-product-form.component.html',
   styleUrls: ['./edit-product-form.component.scss']
 })
-export class EditProductFormComponent {
+export class EditProductFormComponent implements OnChanges {
   @Input() defaultValue?: IProduct;
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
+  @Output() Modalclose: EventEmitter<void> = new EventEmitter<void>();
   formData: FormGroup;
-  submitting: boolean = false;
+  submitting = false;
 
   constructor(
     private fb: FormBuilder,
@@ -26,7 +26,7 @@ export class EditProductFormComponent {
     });
   }
 
-  ngOnChanges() {
+  ngOnChanges(): void {
     if (this.defaultValue) {
       this.formData.setValue({
         name: this.defaultValue.name || '',
@@ -42,8 +42,8 @@ export class EditProductFormComponent {
       this.productService.updateProduct(this.defaultValue.id, { ...this.defaultValue, ...this.formData.value })
         .subscribe(() => {
           this.submitting = false;
-          this.snackBar.open('Product edited successfully', "Ok", { duration: 3000 });
-          this.close.emit();
+          this.snackBar.open('Product edited successfully', 'Ok', { duration: 3000 });
+          this.Modalclose.emit();
         }, () => this.submitting = false);
     }
   }

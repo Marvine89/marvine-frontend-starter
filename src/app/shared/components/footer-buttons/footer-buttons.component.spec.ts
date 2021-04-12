@@ -16,7 +16,7 @@ describe('FooterButtonsComponent', () => {
         {
           provide: UserService,
           useValue: {
-            checkUserType: "FAKE-USER-TYPE"
+            checkUserType: 'FAKE-USER-TYPE'
           }
         }
       ]

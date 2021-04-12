@@ -17,48 +17,49 @@ export class CartService {
     private productService: ProductService,
     private errorService: ErrorService) { }
 
-  fetchCart(user_id: number): Observable<ICard> {
-    return this.httpService.get<ICard>(`/carts/${user_id}`).pipe(
+  fetchCart(userId: number): Observable<ICard> {
+    return this.httpService.get<ICard>(`/carts/${userId}`).pipe(
       shareReplay(),
       catchError(() => this.errorService.showError())
     );
   }
 
-  fetchCartProducts(user_id: number): Observable<IUserProduct[]> {
-    return this.fetchCart(user_id).pipe(
+  fetchCartProducts(userId: number): Observable<IUserProduct[]> {
+    return this.fetchCart(userId).pipe(
       switchMap((v) => {
-        // switch map to get full product information and merge quality 
-        const products = v.products.map((prod) => this.productService.fetchProduct(prod.id).pipe(map((prodR) => ({ ...prodR, quantity: prod.quantity }))));
+        // switch map to get full product information and merge quality
+        const products = v.products.map((prod) => this.productService
+          .fetchProduct(prod.id).pipe(map((prodR) => ({ ...prodR, quantity: prod.quantity }))));
         return forkJoin(products);
       }),
       catchError(() => this.errorService.showError())
     );
   }
 
-  addToCard(user_id: number, product_id: number): Observable<any> {
-    return this.fetchCart(user_id).pipe(
+  addToCard(userId: number, productId: number): Observable<any> {
+    return this.fetchCart(userId).pipe(
       switchMap((cart) => {
         const products = cart.products;
-        const existingindex = products.findIndex((p) => p.id === product_id);
+        const existingindex = products.findIndex((p) => p.id === productId);
 
         // if product exist increase quantity, if not add new product to list
         if (existingindex > -1) {
           ++products[existingindex].quantity;
         } else {
           products.push({
-            id: product_id,
+            id: productId,
             quantity: 1
           });
         }
 
-        return this.httpService.put(`/carts/${user_id}`, { id: user_id, products })
+        return this.httpService.put(`/carts/${userId}`, { id: userId, products });
       }),
       catchError(() => this.errorService.showError())
     );
   }
 
-  deleteCart(user_id: number, product_id: number): Observable<any> {
-    return this.httpService.delete(`/carts/${user_id}/products/${product_id}`).pipe(
+  deleteCart(userId: number, productId: number): Observable<any> {
+    return this.httpService.delete(`/carts/${userId}/products/${productId}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

@@ -14,20 +14,20 @@ export class UserService {
   constructor(private httpService: HttpService, private errorService: ErrorService) { }
 
   fetchUsers(): Observable<User[]> {
-    return this.httpService.get<IUser[]>("/users").pipe(
+    return this.httpService.get<IUser[]>('/users').pipe(
       map((users) => users.map((user) => new User(user))),
       catchError(() => this.errorService.showError())
     );
   }
 
-  fetchUser(user_id: number): Observable<any> {
-    return this.httpService.get(`/users/${user_id}`).pipe(
+  fetchUser(userId: number): Observable<any> {
+    return this.httpService.get(`/users/${userId}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }
 
   saveUserDetails(user: User): void {
-    if (!user) return;
+    if (!user) { return; }
     localStorage.setItem(StorageTypes.USER_DETAILS, JSON.stringify(user));
   }
 

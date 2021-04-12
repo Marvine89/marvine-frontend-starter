@@ -25,7 +25,7 @@ describe('ProductCardComponent', () => {
         },
         {
           provide: MatDialog,
-          useValue: { open: jasmine.createSpy().and.returnValue(of("delete")) }
+          useValue: { open: jasmine.createSpy().and.returnValue(of('delete')) }
         },
         {
           provide: ProductService,
