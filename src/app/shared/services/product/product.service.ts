@@ -44,8 +44,8 @@ export class ProductService {
     );
   }
 
-  deleteProduct(user_id: number): Observable<any> {
-    return this.httpService.delete(`/products/${user_id}`).pipe(
+  deleteProduct(product_id: number): Observable<any> {
+    return this.httpService.delete(`/products/${product_id}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, shareReplay, switchMap, map } from 'rxjs/operators';
-import { ICard, IProduct } from '../../interfaces/product.interface';
+import { ICard } from '../../interfaces/product.interface';
 import { ErrorService } from '../error/error.service';
 import { HttpService } from '../http/http.service';
 import { forkJoin } from 'rxjs';
@@ -53,6 +53,12 @@ export class CartService {
 
         return this.httpService.put(`/carts/${user_id}`, { id: user_id, products })
       }),
+      catchError(() => this.errorService.showError())
+    );
+  }
+
+  deleteCart(user_id: number, product_id: number): Observable<any> {
+    return this.httpService.delete(`/carts/${user_id}/${product_id}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }
