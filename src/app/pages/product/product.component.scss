@@ -1,8 +1,16 @@
 .product-page {
+  &__header {
+    padding: 20px;
+  }
+
+  &__arrow-back {
+    font-size: 50px;
+  }
+
   &__wrapper {
     width: 900px;
     min-height: 400px;
-    margin: 100px auto;
+    margin: 30px auto;
     padding: 20px 0px;
     position: relative;
   }

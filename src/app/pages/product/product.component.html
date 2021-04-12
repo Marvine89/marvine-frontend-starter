@@ -1,4 +1,10 @@
 <section class="product-page default-container">
+  <div class="product-page__header">
+    <mat-icon aria-hidden="false" class="product-page__arrow-back pointer" (click)="goBack()">
+      arrow_back
+    </mat-icon>
+  </div>
+
   <div class="product-page__wrapper shadow-1">
     <div
       *ngIf="product$ | async as product; else loaderContainer"

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -19,6 +20,7 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
+    private location: Location,
     private productService: ProductService,
     private userService: UserService,
     private snackBar: MatSnackBar) {
@@ -48,5 +50,9 @@ export class ProductComponent implements OnInit {
     this.snackBar.open('Product has bee added successfully', 'Ok', {
       duration: 6000,
     });
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 }
