@@ -11,6 +11,12 @@
         <h4 class="shopping-page__item-price">
           {{ product.price | currency }}
         </h4>
+        <h4 class="shopping-page__item-qty">
+          {{ product.quantity }}
+        </h4>
+        <h4 class="shopping-page__item-total">
+          {{ product.price * product.quantity | currency }}
+        </h4>
       </div>
       <div class="shopping-page__total-block">
         <p class="shopping-page__total-price">total price:</p>

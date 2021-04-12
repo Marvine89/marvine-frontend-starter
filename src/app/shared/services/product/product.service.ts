@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, shareReplay } from 'rxjs/operators';
 import { IProduct } from '../../interfaces/product.interface';
 import { ErrorService } from '../error/error.service';
 import { HttpService } from '../http/http.service';
@@ -19,37 +19,33 @@ export class ProductService {
 
   searchProducts(keyword: string = ""): Observable<IProduct[]> {
     return this.httpService.get<IProduct[]>(`/products?q=${keyword}`).pipe(
+      shareReplay(),
       catchError(() => this.errorService.showError())
     );
   }
 
-  fetchProduct(product_id: number): Observable<any> {
-    return this.httpService.get(`/products/${product_id}`).pipe(
+  fetchProduct(product_id: number): Observable<IProduct> {
+    return this.httpService.get<IProduct>(`/products/${product_id}`).pipe(
+      shareReplay(),
       catchError(() => this.errorService.showError())
     );
   }
 
 
-  addProduct(product: IProduct): Observable<any> {
-    return this.httpService.post("/products", product).pipe(
+  addProduct(product: IProduct): Observable<IProduct> {
+    return this.httpService.post<IProduct>("/products", product).pipe(
       catchError(() => this.errorService.showError())
     );
   }
 
-  updateProduct(user_id: number, product_id: any): Observable<any> {
-    return this.httpService.put(`/products/${user_id}`, product_id).pipe(
+  updateProduct(user_id: number, product_id: any): Observable<IProduct> {
+    return this.httpService.put<IProduct>(`/products/${user_id}`, product_id).pipe(
       catchError(() => this.errorService.showError())
     );
   }
 
   deleteProduct(user_id: number): Observable<any> {
     return this.httpService.delete(`/products/${user_id}`).pipe(
-      catchError(() => this.errorService.showError())
-    );
-  }
-
-  deleteProductToCard(user_id: number, product_id: number): Observable<any> {
-    return this.httpService.delete(`/carts/${user_id}/${product_id}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }

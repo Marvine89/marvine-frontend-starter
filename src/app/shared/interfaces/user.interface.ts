@@ -1,3 +1,5 @@
+import { IProduct } from "./product.interface";
+
 export interface IUser {
   id: number;
   name: {
@@ -16,4 +18,8 @@ interface IAddress {
   city: string;
   zip: string;
   street: string;
+}
+
+export interface IUserProduct extends IProduct {
+  quantity: number;
 }
