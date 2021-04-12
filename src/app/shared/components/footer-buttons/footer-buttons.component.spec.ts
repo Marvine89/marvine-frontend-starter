@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { UserService } from '../../services/user/user.service';
 
 import { FooterButtonsComponent } from './footer-buttons.component';
 
@@ -8,9 +10,18 @@ describe('FooterButtonsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FooterButtonsComponent ]
+      declarations: [FooterButtonsComponent],
+      imports: [RouterTestingModule],
+      providers: [
+        {
+          provide: UserService,
+          useValue: {
+            checkUserType: "FAKE-USER-TYPE"
+          }
+        }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
