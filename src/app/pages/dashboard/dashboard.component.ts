@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 
@@ -15,14 +18,16 @@ export class DashboardComponent implements OnInit {
   currentPage: number = 1;
   isLoading: { init: boolean; more: boolean } = { init: true, more: false };
 
-  constructor(private productService: ProductService, private router: Router) { }
+  constructor(
+    private productService: ProductService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
   // Load Initial 12 products
-  loadProducts(): void {
+  private loadProducts(): void {
     this.isLoading.init = true;
     this.productService.fetchProducts()
       .subscribe(
@@ -70,6 +75,10 @@ export class DashboardComponent implements OnInit {
           this.isLoading.init = false;
         },
         () => this.isLoading.init = false);
+  }
+
+  deleteProduct(): void {
+    this.loadProducts();
   }
 
   productClicked(product_id: number): void {

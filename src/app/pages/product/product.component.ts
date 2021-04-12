@@ -21,7 +21,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   isAdmin: boolean = false;
   userId!: number;
   addToCartLoading: boolean = false;
-  private ngUnSubscribe: Subject<void> = new Subject<void>();
+  ngUnSubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -66,15 +66,17 @@ export class ProductComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteContact(id: number): void {
+  deleteProduct(id: number): void {
     this.dialog.open(ProductModalComponent,
       { panelClass: 'product-modal', data: { option: 'delete' } })
       .afterClosed()
       .pipe(takeUntil(this.ngUnSubscribe))
       .subscribe((result: string) => {
         if (result === 'delete') {
-          this._notifyMsg('Product deleted successfully');
-          this.router.navigate(['/']);
+          this.productService.deleteProduct(id).subscribe(() => {
+            this._notifyMsg('Product deleted successfully');
+            this.router.navigate(['/']);
+          });
         }
       });
   }
