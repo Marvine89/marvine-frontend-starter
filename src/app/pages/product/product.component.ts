@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { IProduct } from 'src/app/shared/interfaces/product.interface';
+import { IContactForm, IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { CartService } from 'src/app/shared/services/cart/cart.service';
@@ -55,7 +55,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.addToCartLoading = true;
     this.cartService.addToCard(this.userId, product.id)
       .subscribe(() => {
-        this._notifyMsg('Product has bee added successfully');
+        this._notifyMsg('Product has added to cart');
         this.addToCartLoading = false;
       }, () => this.addToCartLoading = false);
   }
@@ -66,11 +66,26 @@ export class ProductComponent implements OnInit, OnDestroy {
     });
   }
 
+  editProduct(product: IProduct): void {
+    const data: IContactForm = {
+      name: product.name,
+      price: product.price,
+      description: product.description,
+    };
+
+    this.openModal('add', data)
+      .subscribe((result: string) => {
+        if (result === 'delete') {
+          this.productService.updateProduct(product.id, { ...product }).subscribe(() => {
+            this._notifyMsg('Product edited successfully');
+            this.fetchProduct();
+          });
+        }
+      });
+  }
+
   deleteProduct(id: number): void {
-    this.dialog.open(ProductModalComponent,
-      { panelClass: 'product-modal', data: { option: 'delete' } })
-      .afterClosed()
-      .pipe(takeUntil(this.ngUnSubscribe))
+    this.openModal('delete')
       .subscribe((result: string) => {
         if (result === 'delete') {
           this.productService.deleteProduct(id).subscribe(() => {
@@ -79,6 +94,13 @@ export class ProductComponent implements OnInit, OnDestroy {
           });
         }
       });
+  }
+
+  openModal(option: 'add' | 'delete', data?: IContactForm): Observable<any> {
+    return this.dialog.open(ProductModalComponent,
+      { panelClass: 'product-modal', data: { option, data } })
+      .afterClosed()
+      .pipe(takeUntil(this.ngUnSubscribe));
   }
 
   goBack(): void {

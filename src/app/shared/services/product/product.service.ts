@@ -38,8 +38,8 @@ export class ProductService {
     );
   }
 
-  updateProduct(user_id: number, product_id: any): Observable<IProduct> {
-    return this.httpService.put<IProduct>(`/products/${user_id}`, product_id).pipe(
+  updateProduct(id: number, product: IProduct): Observable<IProduct> {
+    return this.httpService.put<IProduct>(`/products/${id}`, product).pipe(
       catchError(() => this.errorService.showError())
     );
   }

@@ -4,15 +4,15 @@
       appearance="outline"
       class="default-input form-component__input"
     >
-      <mat-label>Title</mat-label>
+      <mat-label>Product Name</mat-label>
       <input
         type="text"
-        formControlName="title"
+        formControlName="name"
         matInput
-        placeholder="Enter Title"
+        placeholder="Enter Product Name"
       />
-      <mat-error *ngIf="formData.get('title')?.hasError">
-        Title is required
+      <mat-error *ngIf="formData.get('name')?.hasError">
+        Product Name is required
       </mat-error>
     </mat-form-field>
   </div>
@@ -45,6 +45,7 @@
         matInput
         placeholder="Enter Description"
         formControlName="description"
+        rows="4"
       ></textarea>
 
       <mat-error *ngIf="formData.get('description')?.hasError">
@@ -55,12 +56,13 @@
 
   <div class="form-component__button-block">
     <button
-      mat-button
+      mat-raised-button
       type="submit"
       class="primary-button"
+      color="primary"
       [disabled]="formData.invalid || submitting"
     >
-      <span *ngIf="!submitting">{{ buttonTitle }}</span>
+      <span *ngIf="!submitting">Update Product</span>
       <mat-spinner
         *ngIf="submitting"
         [diameter]="30"

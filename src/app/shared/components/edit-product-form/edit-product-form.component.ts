@@ -17,18 +17,16 @@ export class EditProductFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.formData = this.fb.group({
-      id: [''],
-      title: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       price: ['', [Validators.required]],
       description: ['', [Validators.required, Validators.minLength(7)]],
     });
   }
 
-  ngOnChanges($event: SimpleChanges) {
+  ngOnChanges() {
     if (this.defaultValue) {
       this.formData.setValue({
-        id: this.defaultValue.id || null,
-        title: this.defaultValue.title || '',
+        name: this.defaultValue.name || '',
         price: this.defaultValue.price || '',
         description: this.defaultValue.description || '',
       });

@@ -14,8 +14,7 @@ export interface ICard {
 }
 
 export interface IContactForm {
-  id: number;
-  title: string;
+  name: string;
   price: number;
   description: string;
 }
