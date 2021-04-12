@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ShoppingCartComponent } from './shopping-cart.component';
+import { ShoppingCartComponent } from './components/shopping-cart.component';
 import { RouterModule } from '@angular/router';
 import { routes } from './shopping-cart.routes';
 import { MaterialModule } from 'src/app/material.module';
