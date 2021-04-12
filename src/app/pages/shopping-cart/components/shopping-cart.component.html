@@ -1,5 +1,5 @@
-<app-back-button-header></app-back-button-header>
 <section class="shopping-page default-container">
+  <app-back-button-header></app-back-button-header>
   <h2 class="shopping-page__title">Shopping Cart</h2>
   <div *ngIf="isLoading; else productList" class="shopping-page__loading-block">
     <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
@@ -7,14 +7,14 @@
   <ng-template #productList>
     <div class="shopping-page__items-wrapper">
       <div *ngFor="let product of products" class="shopping-page__items">
-        <h3 class="shopping-page__item-name">{{ product.name }}</h3>
-        <h4 class="shopping-page__item-price">
+        <h3 class="shopping-page__item name">{{ product.name }}</h3>
+        <h4 class="shopping-page__item price">
           {{ product.price | currency }}
         </h4>
-        <h4 class="shopping-page__item-qty">
+        <h4 class="shopping-page__item quantity">
           {{ product.quantity }}
         </h4>
-        <h4 class="shopping-page__item-total">
+        <h4 class="shopping-page__item total">
           {{ product.price * product.quantity | currency }}
         </h4>
       </div>

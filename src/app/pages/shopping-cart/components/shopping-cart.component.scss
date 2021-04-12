@@ -1,25 +1,37 @@
 @import "colours";
+@import "media-query";
 
 .shopping-page {
-  padding-top: 50px;
-
   &__title {
     font-size: 32px;
     text-align: center;
     text-transform: uppercase;
+    margin-top: 30px;
+
+    @include sm-tablet {
+      margin-top: 60px;
+    }
   }
 
   &__loading-block {
     display: flex;
     width: 100%;
-    height: 300px;
+    height: 150px;
     align-items: center;
     justify-content: center;
+
+    @include sm-tablet {
+      height: 300px;
+    }
   }
 
   &__items-wrapper {
     max-width: 400px;
-    margin: 100px auto;
+    margin: 40px auto;
+
+    @include sm-tablet {
+      margin: 100px auto;
+    }
   }
 
   &__items {
@@ -28,8 +40,26 @@
     margin-bottom: 20px;
   }
 
-  &__item-name {
-    
+  &__item {
+    font-size: 12px;
+    line-height: 18px;
+
+    @include sm-tablet {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    &.name {
+      width: 33%;
+    }
+
+    &.price {
+      width: 80px;
+    }
+
+    &.quantity {
+      width: 20px;
+    }
   }
 
   &__total-block {
