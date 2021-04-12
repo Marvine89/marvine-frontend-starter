@@ -11,7 +11,7 @@ import { ProductService } from '../../services/product/product.service';
 })
 export class EditProductFormComponent {
   @Input() defaultValue?: IProduct;
-  @Output() submitData: EventEmitter<any> = new EventEmitter<any>();
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
   formData: FormGroup;
   submitting: boolean = false;
 
@@ -39,10 +39,11 @@ export class EditProductFormComponent {
   submitForm(): void {
     if (this.defaultValue) {
       this.submitting = true;
-      this.productService.updateProduct(this.defaultValue.id, { ...this.formData.value, ...this.defaultValue })
+      this.productService.updateProduct(this.defaultValue.id, { ...this.defaultValue, ...this.formData.value })
         .subscribe(() => {
           this.submitting = false;
           this.snackBar.open('Product edited successfully', "Ok", { duration: 3000 });
+          this.close.emit();
         }, () => this.submitting = false);
     }
   }
