@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IContactForm } from '../../interfaces/product.interface';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { IProduct } from '../../interfaces/product.interface';
+import { ProductService } from '../../services/product/product.service';
 
 @Component({
   selector: 'app-edit-product-form',
@@ -8,14 +10,15 @@ import { IContactForm } from '../../interfaces/product.interface';
   styleUrls: ['./edit-product-form.component.scss']
 })
 export class EditProductFormComponent {
-  formData: FormGroup;
-  @Input() defaultValue?: IContactForm;
-  @Input() buttonTitle: string = 'Update contact';
-  @Input() submitting: boolean = false;
-  @Input() showDelete: boolean = false;
+  @Input() defaultValue?: IProduct;
   @Output() submitData: EventEmitter<any> = new EventEmitter<any>();
+  formData: FormGroup;
+  submitting: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private productService: ProductService,
+    private snackBar: MatSnackBar) {
     this.formData = this.fb.group({
       name: ['', [Validators.required]],
       price: ['', [Validators.required]],
@@ -33,6 +36,15 @@ export class EditProductFormComponent {
     }
   }
 
-  submitForm(): void { }
+  submitForm(): void {
+    if (this.defaultValue) {
+      this.submitting = true;
+      this.productService.updateProduct(this.defaultValue.id, { ...this.formData.value, ...this.defaultValue })
+        .subscribe(() => {
+          this.submitting = false;
+          this.snackBar.open('Product edited successfully', "Ok", { duration: 3000 });
+        }, () => this.submitting = false);
+    }
+  }
 
 }

@@ -14,6 +14,7 @@
   <app-edit-product-form
     *ngIf="data?.option === 'add'"
     [defaultValue]="data.data"
+    (close)="dialogRef.close('updated')"
   >
   </app-edit-product-form>
 

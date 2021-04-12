@@ -3,7 +3,7 @@ import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { IContactForm, IProduct } from 'src/app/shared/interfaces/product.interface';
+import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { CartService } from 'src/app/shared/services/cart/cart.service';
@@ -67,19 +67,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   editProduct(product: IProduct): void {
-    const data: IContactForm = {
-      name: product.name,
-      price: product.price,
-      description: product.description,
-    };
-
-    this.openModal('add', data)
+    this.openModal('add', product)
       .subscribe((result: string) => {
-        if (result === 'delete') {
-          this.productService.updateProduct(product.id, { ...product }).subscribe(() => {
-            this._notifyMsg('Product edited successfully');
-            this.fetchProduct();
-          });
+        if (result === 'updated') {
+          this.fetchProduct();
         }
       });
   }
@@ -96,7 +87,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       });
   }
 
-  openModal(option: 'add' | 'delete', data?: IContactForm): Observable<any> {
+  openModal(option: 'add' | 'delete', data?: IProduct): Observable<any> {
     return this.dialog.open(ProductModalComponent,
       { panelClass: 'product-modal', data: { option, data } })
       .afterClosed()
