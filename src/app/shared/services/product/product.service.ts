@@ -41,8 +41,8 @@ export class ProductService {
     );
   }
 
-  addToCard(user_id: number, product: any): Observable<any> {
-    return this.httpService.post(`/carts/${user_id}`, product).pipe(
+  addToCard(user_id: number, product_id: number, qty: number = 1): Observable<any> {
+    return this.httpService.put(`/carts/${user_id}`, { id: product_id, quantity: qty }).pipe(
       catchError(() => this.errorService.showError())
     );
   }

@@ -23,6 +23,7 @@
             color="primary"
             class="default-button product-page__button"
             *ngIf="!isAdmin"
+            (click)="addToCard(product)"
           >
             Add to Card
           </button>

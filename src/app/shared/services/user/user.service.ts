@@ -36,6 +36,11 @@ export class UserService {
     return user ? JSON.parse(user) : null;
   }
 
+  get getUserId(): number | null {
+    const user = this.getUserDetails;
+    return user ? user.user.id : null;
+  }
+
   get checkUserType(): boolean {
     const user = this.getUserDetails;
     return user ? user.user.role === UserType.ADMIN : false;
