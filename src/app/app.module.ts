@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     FormsModule,
     InfiniteScrollModule,
     ReactiveFormsModule,
+    IvyCarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

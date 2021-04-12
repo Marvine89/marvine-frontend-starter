@@ -10,15 +10,15 @@ import { UserService } from '../../services/user/user.service';
 export class ProductCardComponent {
   @Input() product!: IProduct;
   @Output('onClick') clicked: EventEmitter<number> = new EventEmitter<number>();
-  isAdmin: Boolean = false;
+  isAdmin: boolean = false;
 
   constructor(private userService: UserService) {
-    this.isAdmin = this.userService.getUserAdmin;
+    this.isAdmin = this.userService.checkUserType;
   }
 
   viewProduct(): void {
     this.clicked.emit(this.product.id);
   }
-  
+
   deleteProduct(): void { }
 }
