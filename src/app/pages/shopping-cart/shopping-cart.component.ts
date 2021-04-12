@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
-import { ProductService } from 'src/app/shared/services/product/product.service';
+import { CartService } from 'src/app/shared/services/cart/cart.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
 @Component({
@@ -14,13 +14,13 @@ export class ShoppingCartComponent implements OnInit {
   totalPrice: number = 0;
 
   constructor(
-    private productService: ProductService,
+    private cartService: CartService,
     private userService: UserService) { }
 
   ngOnInit(): void {
     const userId = this.userService.getUserId || 0;
     this.isLoading = true;
-    this.productService.fetchCartProducts(userId)
+    this.cartService.fetchCartProducts(userId)
       .subscribe((products) => {
         this.products = products;
         this.totalPrice = products.reduce((prev, current) => prev + current.price, 0);

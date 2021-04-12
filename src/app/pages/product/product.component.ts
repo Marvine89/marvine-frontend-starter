@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
+import { CartService } from 'src/app/shared/services/cart/cart.service';
 
 @Component({
   selector: 'app-product',
@@ -16,13 +17,13 @@ export class ProductComponent implements OnInit {
   product$!: Observable<IProduct>;
   isAdmin: boolean = false;
   userId!: number;
-  qty: number = 1;
   addToCartLoading: boolean = false;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private location: Location,
     private productService: ProductService,
+    private cartService: CartService,
     private userService: UserService,
     private snackBar: MatSnackBar) {
 
@@ -41,9 +42,8 @@ export class ProductComponent implements OnInit {
 
   addToCard(product: IProduct): void {
     this.addToCartLoading = true;
-    this.productService.addToCard(this.userId, product.id, this.qty)
+    this.cartService.addToCard(this.userId, product.id)
       .subscribe(() => {
-        this.qty++;
         this.showMessage();
         this.addToCartLoading = false;
       }, () => this.addToCartLoading = false);
