@@ -14,6 +14,7 @@ import { MaterialModule } from './material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { FooterButtonsComponent } from './shared/components/footer-buttons/footer-buttons.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     ProductComponent,
     BannerComponent,
     ProductCardComponent,
-    LoginComponent
+    LoginComponent,
+    FooterButtonsComponent
   ],
   imports: [
     BrowserModule,
