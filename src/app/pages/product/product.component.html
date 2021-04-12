@@ -1,0 +1,68 @@
+<section class="product-page default-container">
+  <app-back-button-header></app-back-button-header>
+
+  <div class="product-page__wrapper shadow-1">
+    <div
+      *ngIf="product$ | async as product; else loaderContainer"
+      class="product-page__details-block"
+    >
+      <ng-container *ngIf="product; else emptyProduct">
+        <div class="product-page__carousel-block">
+          <carousel [loop]="false" [cellsToShow]="1" class="product-page__carousel">
+            <div *ngFor="let image of product.images" class="carousel-cell">
+              <img [src]="image" />
+            </div>
+          </carousel>
+        </div>
+        <h3 class="product-page__title">{{ product.name }}</h3>
+        <h6 class="product-page__price">
+          Price: {{ product.price | currency }}
+        </h6>
+        <p class="product-page__description">{{ product.description }}</p>
+        <div class="product-page__button-block">
+          <button
+            mat-raised-button
+            color="primary"
+            class="default-button product-page__button"
+            *ngIf="!isAdmin"
+            (click)="addToCard(product)"
+          >
+            <span *ngIf="!addToCartLoading">Add to Card</span>
+            <mat-spinner
+              *ngIf="addToCartLoading"
+              [strokeWidth]="1"
+              [diameter]="30"
+              color="warn"
+            ></mat-spinner>
+          </button>
+          <ng-container *ngIf="isAdmin">
+            <button
+              mat-raised-button
+              class="default-button product-page__button"
+              (click)="editProduct(product)"
+            >
+              Edit Product
+            </button>
+            <button
+              mat-raised-button
+              color="warn"
+              class="default-button product-page__button"
+              (click)="deleteProduct(product.id)"
+            >
+              Delete Product
+            </button>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #emptyProduct>
+        <p class="product-page__description">Product not found</p>
+      </ng-template>
+    </div>
+    <ng-template #loaderContainer>
+      <div class="product-page__loading-container">
+        <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</section>
+<app-footer-buttons></app-footer-buttons>

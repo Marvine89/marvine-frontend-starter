@@ -1,0 +1,7 @@
+.default-container {
+  padding: 0px 3%;
+
+  @include md-tablet {
+    padding: 0px 6%;
+  }
+}

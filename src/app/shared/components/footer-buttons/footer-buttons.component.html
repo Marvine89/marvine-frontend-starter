@@ -1,0 +1,12 @@
+<section class="footer-buttons">
+  <div class="footer-buttons__column">
+    <button mat-fab color="primary" *ngIf="!isAdmin" (click)="shoppingCard()">
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </div>
+  <div class="footer-buttons__column right">
+    <button mat-fab color="warn" (click)="logout()">
+      <mat-icon>power_settings_new</mat-icon>
+    </button>
+  </div>
+</section>

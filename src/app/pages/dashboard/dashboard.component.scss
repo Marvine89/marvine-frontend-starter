@@ -1,0 +1,45 @@
+@import "media-query";
+
+.dashboard {
+  &__wrapper {
+    padding-bottom: 60px;
+  }
+
+  &__input-section {
+    margin: 40px 0px 10px;
+
+    @include sm-tablet {
+      margin: 40px 0px;
+    }
+  }
+
+  &__search-input {
+    width: 100%;
+
+    @include sm-tablet {
+      width: 400px;
+    }
+  }
+
+  &__loader-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  &__products-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @include sm-tablet {
+      justify-content: flex-start;
+    }
+  }
+
+  &__products {
+    display: block;
+    margin-bottom: 30px;
+  }
+}

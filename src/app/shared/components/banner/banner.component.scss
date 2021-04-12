@@ -1,0 +1,13 @@
+@import "media-query";
+
+.banner {
+  width: 100%;
+  height: 220px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include sm-tablet {
+    height: 550px;
+  }
+}

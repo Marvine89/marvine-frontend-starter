@@ -1,0 +1,73 @@
+<form class="form-component" [formGroup]="formData" (ngSubmit)="submitForm()">
+  <div class="form-component__input-block">
+    <mat-form-field
+      appearance="outline"
+      class="default-input form-component__input"
+    >
+      <mat-label>Product name</mat-label>
+      <input
+        type="text"
+        formControlName="name"
+        matInput
+        placeholder="Enter Product name"
+      />
+      <mat-error *ngIf="formData.get('name')?.hasError">
+        Product name is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-component__input-block">
+    <mat-form-field
+      appearance="outline"
+      class="default-input form-component__input"
+    >
+      <mat-label>Price</mat-label>
+      <input
+        type="number"
+        formControlName="price"
+        matInput
+        placeholder="Enter Price"
+      />
+      <mat-error *ngIf="formData.get('price')?.hasError">
+        Price is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-component__input-block">
+    <mat-form-field
+      appearance="outline"
+      class="default-input form-component__input"
+    >
+      <mat-label>Price</mat-label>
+      <textarea
+        matInput
+        placeholder="Enter Description"
+        formControlName="description"
+        rows="4"
+      ></textarea>
+
+      <mat-error *ngIf="formData.get('description')?.hasError">
+        Price is required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="form-component__button-block">
+    <button
+      mat-raised-button
+      type="submit"
+      class="default-button"
+      color="primary"
+      [disabled]="formData.invalid || submitting"
+    >
+      <span *ngIf="!submitting">Update Product</span>
+      <mat-spinner
+        *ngIf="submitting"
+        [diameter]="30"
+        [strokeWidth]="2"
+      ></mat-spinner>
+    </button>
+  </div>
+</form>

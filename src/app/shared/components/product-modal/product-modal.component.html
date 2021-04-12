@@ -1,0 +1,44 @@
+<section class="product-modal">
+  <div class="product-modal__header">
+    <h5 class="product-modal__header-title">
+      {{ data?.option === "delete" ? "Delete Product" : "Edit Product" }}
+    </h5>
+    <a
+      class="product-modal__close-icon-block pointer"
+      (click)="dialogRef.close()"
+    >
+      <i class="product-modal__close-icon material-icons pointer">close</i>
+    </a>
+  </div>
+
+  <app-edit-product-form
+    *ngIf="data?.option === 'add'"
+    [defaultValue]="data.data"
+    (close)="dialogRef.close('updated')"
+  >
+  </app-edit-product-form>
+
+  <div class="product-modal__delete-block" *ngIf="data?.option === 'delete'">
+    <p class="product-modal__delete-title">
+      Are you sure you would like to delete this product ?
+    </p>
+    <div class="product-modal__button-block">
+      <button
+        mat-button
+        type="button"
+        class="secondary-button product-modal__button-delete pointer"
+        (click)="dialogRef.close('cancel')"
+      >
+        Cancel
+      </button>
+      <button
+        mat-button
+        type="submit"
+        class="primary-button"
+        (click)="dialogRef.close('delete')"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</section>

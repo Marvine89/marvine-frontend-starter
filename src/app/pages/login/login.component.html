@@ -1,0 +1,40 @@
+<section class="login-page">
+  <div class="login-page__form-wrapper">
+    <h3 class="t3 uppercase center login-page__title">Log in as ?</h3>
+    <form
+      *ngIf="users$ | async as users; else loaderContainer"
+      #loginForm="ngForm"
+      (ngSubmit)="login(loginForm.value, users)"
+      class="login-page__form"
+    >
+      <mat-form-field appearance="fill" class="login-page__select-user">
+        <mat-label>Select user type</mat-label>
+        <mat-select name="selectedUserType" ngModel required>
+          <mat-option [value]="userType.CUSTOMER">
+            {{ userType.CUSTOMER }}
+          </mat-option>
+          <mat-option [value]="userType.ADMIN">
+            {{ userType.ADMINISTRATOR }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div class="login-page__button-block">
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          class="default-button"
+          [disabled]="loginForm.invalid"
+        >
+          Log in
+        </button>
+      </div>
+    </form>
+
+    <ng-template #loaderContainer>
+      <div class="login-page__loader-wrapper">
+        <mat-spinner [strokeWidth]="3" [diameter]="90"></mat-spinner>
+      </div>
+    </ng-template>
+  </div>
+</section>

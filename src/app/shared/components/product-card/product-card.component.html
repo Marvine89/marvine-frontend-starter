@@ -1,0 +1,21 @@
+<section class="product-card">
+  <mat-card class="example-card">
+    <img mat-card-image [src]="product.defaultImage" [alt]="product.name" />
+    <mat-card-content>
+      <mat-card-title class="product-card__title">
+        {{ product.name }}
+      </mat-card-title>
+    </mat-card-content>
+    <mat-card-actions class="product-card__button-block">
+      <button mat-button (click)="viewProduct()">VIEW PRODUCT</button>
+      <button
+        mat-button
+        color="accent"
+        *ngIf="isAdmin"
+        (click)="deleteProduct()"
+      >
+        <mat-icon aria-hidden="false">delete</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</section>

@@ -1,0 +1,15 @@
+.product-card {
+  width: 300px;
+  margin: 5px 10px;
+
+  &__title {
+    font-size: 22px;
+    line-height: 26px;
+    min-height: 52px;
+  }
+
+  &__button-block {
+    display: flex;
+    justify-content: space-between;
+  }
+}
