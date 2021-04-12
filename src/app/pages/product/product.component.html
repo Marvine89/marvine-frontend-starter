@@ -1,6 +1,10 @@
 <section class="product-page default-container">
   <div class="product-page__header">
-    <mat-icon aria-hidden="false" class="product-page__arrow-back pointer" (click)="goBack()">
+    <mat-icon
+      aria-hidden="false"
+      class="product-page__arrow-back pointer"
+      (click)="goBack()"
+    >
       arrow_back
     </mat-icon>
   </div>
@@ -31,7 +35,13 @@
             *ngIf="!isAdmin"
             (click)="addToCard(product)"
           >
-            Add to Card
+            <span *ngIf="!addToCartLoading">Add to Card</span>
+            <mat-spinner
+              *ngIf="addToCartLoading"
+              [strokeWidth]="1"
+              [diameter]="30"
+              color="warn"
+            ></mat-spinner>
           </button>
           <ng-container *ngIf="isAdmin">
             <button

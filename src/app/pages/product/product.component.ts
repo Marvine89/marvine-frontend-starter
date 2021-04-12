@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   isAdmin: boolean = false;
   userId!: number;
   qty: number = 1;
+  addToCartLoading: boolean = false;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -39,11 +40,13 @@ export class ProductComponent implements OnInit {
   }
 
   addToCard(product: IProduct): void {
+    this.addToCartLoading = true;
     this.productService.addToCard(this.userId, product.id, this.qty)
       .subscribe(() => {
         this.qty++;
-        this.showMessage()
-      });
+        this.showMessage();
+        this.addToCartLoading = false;
+      }, () => this.addToCartLoading = false);
   }
 
   showMessage(): void {
