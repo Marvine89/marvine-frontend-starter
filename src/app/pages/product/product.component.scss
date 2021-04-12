@@ -17,6 +17,10 @@
     margin: auto;
   }
 
+  &__carousel {
+    z-index: 1;
+  }
+
   &__title {
     font-size: 22px;
     letter-spacing: 1px;

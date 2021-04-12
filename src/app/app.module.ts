@@ -16,6 +16,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FooterButtonsComponent } from './shared/components/footer-buttons/footer-buttons.component';
 import { BackButtonHeaderModule } from './shared/components/back-button-header/back-button-header.module';
+import { ProductModalComponent } from './shared/components/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { BackButtonHeaderModule } from './shared/components/back-button-header/b
     ProductCardComponent,
     LoginComponent,
     FooterButtonsComponent,
+    ProductModalComponent,
   ],
   imports: [
     BrowserModule,

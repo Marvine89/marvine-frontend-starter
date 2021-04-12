@@ -1,0 +1,58 @@
+@import "colours";
+
+.product-modal {
+  &__header {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 20px;
+  }
+
+  &__header-title {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  &__close-icon-block {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  &__close-icon-block:hover i {
+    color: $blue-900;
+  }
+
+  &__close-icon {
+    font-size: 35px;
+    padding-top: 10px;
+  }
+
+  &__form {
+    display: block;
+    padding: 16px;
+  }
+
+  &__delete-block {
+    padding: 0 30px 30px 30px;
+  }
+
+  &__delete-title {
+    font-size: 18px;
+    margin: 0 0 30px 0;
+    text-align: center;
+  }
+
+  &__button-block {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__button-delete {
+    margin-right: 30px;
+  }
+}

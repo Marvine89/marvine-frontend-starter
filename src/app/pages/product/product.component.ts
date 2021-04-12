@@ -1,31 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { IProduct } from 'src/app/shared/interfaces/product.interface';
 import { ProductService } from 'src/app/shared/services/product/product.service';
 import { UserService } from 'src/app/shared/services/user/user.service';
 import { CartService } from 'src/app/shared/services/cart/cart.service';
+import { MatDialog } from '@angular/material/dialog';
+import { takeUntil } from 'rxjs/operators';
+import { ProductModalComponent } from 'src/app/shared/components/product-modal/product-modal.component';
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
   product$!: Observable<IProduct>;
   isAdmin: boolean = false;
   userId!: number;
   addToCartLoading: boolean = false;
+  private ngUnSubscribe: Subject<void> = new Subject<void>();
 
   constructor(
     private activeRoute: ActivatedRoute,
     private location: Location,
+    private router: Router,
     private productService: ProductService,
     private cartService: CartService,
     private userService: UserService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog) {
 
     this.isAdmin = this.userService.checkUserType;
     this.userId = this.userService.getUserId || 0;
@@ -33,6 +39,11 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchProduct();
+  }
+
+  ngOnDestroy(): void {
+    this.ngUnSubscribe.next();
+    this.ngUnSubscribe.complete();
   }
 
   fetchProduct(): void {
@@ -44,15 +55,28 @@ export class ProductComponent implements OnInit {
     this.addToCartLoading = true;
     this.cartService.addToCard(this.userId, product.id)
       .subscribe(() => {
-        this.showMessage();
+        this._notifyMsg('Product has bee added successfully');
         this.addToCartLoading = false;
       }, () => this.addToCartLoading = false);
   }
 
-  showMessage(): void {
-    this.snackBar.open('Product has bee added successfully', 'Ok', {
+  private _notifyMsg(text: string): void {
+    this.snackBar.open(text, 'Ok', {
       duration: 6000,
     });
+  }
+
+  deleteContact(id: number): void {
+    this.dialog.open(ProductModalComponent,
+      { panelClass: 'product-modal', data: { option: 'delete' } })
+      .afterClosed()
+      .pipe(takeUntil(this.ngUnSubscribe))
+      .subscribe((result: string) => {
+        if (result === 'delete') {
+          this._notifyMsg('Product deleted successfully');
+          this.router.navigate(['/']);
+        }
+      });
   }
 
   goBack(): void {

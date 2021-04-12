@@ -8,7 +8,7 @@
     >
       <ng-container *ngIf="product; else emptyProduct">
         <div class="product-page__carousel-block">
-          <carousel [loop]="false" [cellsToShow]="1">
+          <carousel [loop]="false" [cellsToShow]="1" class="product-page__carousel">
             <div *ngFor="let image of product.images" class="carousel-cell">
               <img [src]="image" />
             </div>
@@ -46,6 +46,7 @@
               mat-raised-button
               color="warn"
               class="default-button product-page__button"
+              (click)="deleteContact(product.id)"
             >
               Delete Product
             </button>
