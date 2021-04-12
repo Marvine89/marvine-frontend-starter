@@ -36,7 +36,7 @@ export class ProductService {
     );
   }
 
-  fetchMergedCart(user_id: number): Observable<IProduct[]> {
+  fetchCartProducts(user_id: number): Observable<IProduct[]> {
     return this.httpService.get<ICard>(`/carts/${user_id}`).pipe(
       switchMap((v) => {
         const products = v.products.map((prod) => this.fetchProduct(prod.id));

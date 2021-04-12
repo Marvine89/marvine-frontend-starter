@@ -20,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
   ngOnInit(): void {
     const userId = this.userService.getUserId || 0;
     this.isLoading = true;
-    this.productService.fetchMergedCart(userId)
+    this.productService.fetchCartProducts(userId)
       .subscribe((products) => {
         this.products = products;
         this.totalPrice = products.reduce((prev, current) => prev + current.price, 0);
