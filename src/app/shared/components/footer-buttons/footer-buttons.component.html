@@ -1,6 +1,6 @@
 <section class="footer-buttons">
   <div class="footer-buttons__column" (click)="shoppingCard()">
-    <button mat-fab color="primary">
+    <button mat-fab color="primary" *ngIf="!isAdmin">
       <mat-icon>shopping_cart</mat-icon>
     </button>
   </div>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { IProduct } from '../../interfaces/product.interface';
+import { concat, Observable } from 'rxjs';
+import { catchError, map, switchMap, } from 'rxjs/operators';
+import { ICard, IProduct } from '../../interfaces/product.interface';
 import { ErrorService } from '../error/error.service';
 import { HttpService } from '../http/http.service';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,23 @@ export class ProductService {
     );
   }
 
-  fetchCard(user_id: number): Observable<any> {
-    return this.httpService.get(`/carts/${user_id}`).pipe(
+  fetchCart(user_id: number): Observable<ICard> {
+    return this.httpService.get<ICard>(`/carts/${user_id}`).pipe(
       catchError(() => this.errorService.showError())
     );
   }
 
-  addProduct(product: any): Observable<any> {
+  fetchMergedCart(user_id: number): Observable<IProduct[]> {
+    return this.httpService.get<ICard>(`/carts/${user_id}`).pipe(
+      switchMap((v) => {
+        const products = v.products.map((prod) => this.fetchProduct(prod.id));
+        return forkJoin(products);
+      }),
+      catchError(() => this.errorService.showError())
+    );
+  }
+
+  addProduct(product: IProduct): Observable<any> {
     return this.httpService.post("/products", product).pipe(
       catchError(() => this.errorService.showError())
     );

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-footer-buttons',
@@ -7,8 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer-buttons.component.scss']
 })
 export class FooterButtonsComponent {
+  isAdmin: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) {
+    this.isAdmin = this.userService.checkUserType;
+  }
 
   logout(): void {
     this.router.navigate(["/login"]);

@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FooterButtonsComponent } from './shared/components/footer-buttons/footer-buttons.component';
+import { BackButtonHeaderModule } from './shared/components/back-button-header/back-button-header.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { FooterButtonsComponent } from './shared/components/footer-buttons/foote
     BannerComponent,
     ProductCardComponent,
     LoginComponent,
-    FooterButtonsComponent
+    FooterButtonsComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +38,7 @@ import { FooterButtonsComponent } from './shared/components/footer-buttons/foote
     InfiniteScrollModule,
     ReactiveFormsModule,
     IvyCarouselModule,
+    BackButtonHeaderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

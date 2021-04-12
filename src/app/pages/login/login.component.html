@@ -9,11 +9,11 @@
       <mat-form-field appearance="fill" class="login-page__select-user">
         <mat-label>Select user type</mat-label>
         <mat-select name="selectedUserType" ngModel required>
-          <mat-option [value]="userType.ADMIN">
-            {{ userType.ADMINISTRATOR }}
-          </mat-option>
           <mat-option [value]="userType.CUSTOMER">
             {{ userType.CUSTOMER }}
+          </mat-option>
+          <mat-option [value]="userType.ADMIN">
+            {{ userType.ADMINISTRATOR }}
           </mat-option>
         </mat-select>
       </mat-form-field>

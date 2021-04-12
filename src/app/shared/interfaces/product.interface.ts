@@ -7,3 +7,8 @@ export interface IProduct {
   price: number;
   discount: number;
 }
+
+export interface ICard {
+  id: number;
+  products: Array<{ id: number; quantity: number }>;
+}
