@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IProduct } from '../../interfaces/product.interface';
+import { IContactForm } from '../../interfaces/product.interface';
 
 interface IProductModal {
   option: 'add' | 'edit' | 'delete';
-  data?: IProduct
+  data?: IContactForm
 }
 
 @Component({

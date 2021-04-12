@@ -1,0 +1,37 @@
+@import "media-query";
+
+.form-component {
+  display: flex;
+  flex-wrap: wrap;
+
+  &__input-block {
+    width: 100%;
+
+    @include sm-tablet {
+      width: 45%;
+      margin-right: 20px;
+    }
+  }
+
+  &__input-block:nth-child(2) {
+    @include sm-tablet {
+      margin-right: 0;
+      margin-left: 20px;
+    }
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__button-block {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    @include sm-tablet {
+      flex-direction: row;
+    }
+  }
+}

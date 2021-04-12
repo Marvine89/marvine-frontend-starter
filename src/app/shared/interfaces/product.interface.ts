@@ -12,3 +12,10 @@ export interface ICard {
   id: number;
   products: Array<{ id: number; quantity: number }>;
 }
+
+export interface IContactForm {
+  id: number;
+  title: string;
+  price: number;
+  description: string;
+}

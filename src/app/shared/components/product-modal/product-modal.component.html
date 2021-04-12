@@ -7,11 +7,15 @@
       class="product-modal__close-icon-block pointer"
       (click)="dialogRef.close()"
     >
-      <i class="product-modal__close-icon material-icons pointer"> close </i>
+      <i class="product-modal__close-icon material-icons pointer">close</i>
     </a>
   </div>
 
-  <ng-container *ngIf="data?.option === 'add'"> </ng-container>
+  <app-edit-product-form
+    *ngIf="data?.option === 'add'"
+    [defaultValue]="data.data"
+  >
+  </app-edit-product-form>
 
   <div class="product-modal__delete-block" *ngIf="data?.option === 'delete'">
     <p class="product-modal__delete-title">

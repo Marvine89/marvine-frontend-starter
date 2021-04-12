@@ -17,6 +17,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { FooterButtonsComponent } from './shared/components/footer-buttons/footer-buttons.component';
 import { BackButtonHeaderModule } from './shared/components/back-button-header/back-button-header.module';
 import { ProductModalComponent } from './shared/components/product-modal/product-modal.component';
+import { EditProductFormComponent } from './shared/components/edit-product-form/edit-product-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ProductModalComponent } from './shared/components/product-modal/product
     LoginComponent,
     FooterButtonsComponent,
     ProductModalComponent,
+    EditProductFormComponent,
   ],
   imports: [
     BrowserModule,
